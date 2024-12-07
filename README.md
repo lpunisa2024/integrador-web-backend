@@ -6,8 +6,9 @@ Este é o backend do sistema de cadastro de reclamações. Ele foi desenvolvido 
 
 ## Funcionalidades
 
-- API para cadastro de reclamações.
-- API para listagem de reclamações armazenadas.
+- API para cadastro de reclamações com novos campos: `nome`, `idade`, `endereço` e `descrição`.
+- API para listagem de todas as reclamações cadastradas.
+- API para exclusão de reclamações específicas por ID.
 - Banco de dados SQLite simples e eficiente.
 
 ---
@@ -30,7 +31,7 @@ Siga os passos abaixo para configurar e executar o backend:
 Se você ainda não clonou o repositório, faça isso com o comando:
 ```bash
 git clone <URL_DO_REPOSITORIO>
-cd integrador-web-backend
+cd reclamacoes-backend
 ```
 
 ### 2. Instale as Dependências
@@ -59,12 +60,19 @@ O servidor será iniciado e estará disponível em:
 ## Endpoints Disponíveis
 
 ### **POST /reclamacoes**
-Cadastra uma nova reclamação.
+Cadastra uma nova reclamação com os seguintes campos obrigatórios:
+- `nome`: Nome do reclamante (string).
+- `idade`: Idade do reclamante (número).
+- `endereco`: Endereço do reclamante (string).
+- `descricao`: Descrição da reclamação (string).
 
 - **Exemplo de Requisição**:
   ```json
   {
-    "descricao": "Minha reclamação sobre o serviço."
+    "nome": "Luiz Pillon",
+    "idade": 35,
+    "endereco": "Itupeva",
+    "descricao": "Problema com o serviço contratado."
   }
   ```
 
@@ -84,13 +92,34 @@ Retorna todas as reclamações cadastradas.
   [
     {
       "id": 1,
-      "descricao": "Minha reclamação sobre o serviço."
-    },
-    {
-      "id": 2,
-      "descricao": "Outra reclamação."
+      "nome": "Luiz Pillon",
+      "idade": 35,
+      "endereco": "Itupeva",
+      "descricao": "Problema com o serviço contratado."
     }
   ]
+  ```
+
+### **DELETE /reclamacoes/:id**
+Exclui uma reclamação específica com base no ID fornecido.
+
+- **Exemplo de Requisição**:
+  ```bash
+  DELETE /reclamacoes/1
+  ```
+
+- **Resposta de Sucesso**:
+  ```json
+  {
+    "message": "Reclamação removida com sucesso"
+  }
+  ```
+
+- **Erro (caso o ID não seja encontrado)**:
+  ```json
+  {
+    "error": "Reclamação não encontrada"
+  }
   ```
 
 ---
