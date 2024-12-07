@@ -30,7 +30,7 @@ Siga os passos abaixo para configurar e executar o backend:
 Se você ainda não clonou o repositório, faça isso com o comando:
 ```bash
 git clone <URL_DO_REPOSITORIO>
-cd reclamacoes-backend
+cd integrador-web-backend
 ```
 
 ### 2. Instale as Dependências
